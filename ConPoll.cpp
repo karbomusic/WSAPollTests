@@ -23,8 +23,14 @@ int timeSpan = 5;
 bool abortLoop = false;
 int loopCount = 0;
 std::string ipAddress = "192.168.2.1";
+int portNum = 80;
 
 // Main function
+
+// USAGE WSAPollTest.exe <IP> <IntervalInSeconds>
+// 
+// Arguments are technically optional but the hardcoded defaults probably aren't useful (192.168.2.1:80)
+
 int main(int argc, char* argv[]) {
 
     // Check if an IP address was passed as a command-line argument
@@ -57,7 +63,7 @@ int main(int argc, char* argv[]) {
     }
 
     // Create a connection
-    SOCKET sock = createConnection(ipAddress.c_str(), 80);
+    SOCKET sock = createConnection(ipAddress.c_str(), portNum);
 
     if (checkSocketStatus(sock, timeSpan * 1000) == SOCKET_ERROR) {
         std::cerr << "Socket status check failed." << std::endl;
